@@ -1,0 +1,8 @@
+
+
+th,td{
+    padding:1px;
+    text-align:left;
+    border-bottom: 1px solid #ddd ;
+}
+tr:hover{background-color: rgb(216, 50, 50);}

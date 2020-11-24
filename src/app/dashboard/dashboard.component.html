@@ -1,0 +1,70 @@
+<div>
+    
+    <table width='100%' id="listofBooks" class="table-striped" >
+        <tr>
+            <th>ID</th>
+            <th>Director</th>
+            <th>Title</th>
+            <th>Year</th>
+            <th>Like</th>
+            <th>DisLike</th>
+            <th></th> 
+            <th></th>
+            <th></th>
+        </tr>
+        
+        <tr *ngFor="let m of movies" id=row{{m.id}} >
+           
+            <td>{{m.id}}</td>
+            <td>{{m.director}}</td>
+            <td>{{m.title}}</td>
+            <td>{{m.year}}</td>
+            <td id=like{{m.id}}>{{m.likefilm}}</td>
+            <td id=dislike{{m.id}}>{{m.dislikefilm}}</td>
+            <td>
+              <input type="button" name={{m.id}} (click)="AddLike($event)" class="btn btn-primary"  value="like"  >
+           </td>
+           <td>
+              <input type="button" name={{m.id}} (click)="AddDislike($event)" class="btn btn-warning"  value="Dislike"  >
+            </td>
+            <td>
+              <input type="button" name={{m.id}} (click)="DeleteMovie($event)" class="btn btn-danger" value="Delete"  >
+            </td>
+          </tr>
+     </table>    
+     <input type="button"  (click)="SortBook()" value="Sort Book" class="btn btn-secondary"  >
+     <br>
+     
+     <form #f="ngForm"  method="post"    >
+             <input type="text" name="id" [(ngModel)]="CreatedMovie.id" type="hidden">
+             <br>
+             <label>Title:   </label> 
+             <br>
+             <input type="text" name="title" [(ngModel)]="CreatedMovie.title" #title="ngModel" pattern="[a-zA-Z0-9]{3,}" required class="form-group" />
+             <div [hidden]="title.valid || title.untouched" class="alert alert-danger">
+              incorect title
+            </div>
+             <br>
+             <label>Director: </label> 
+             <br>
+             <input type="text" name="director" [(ngModel)]="CreatedMovie.director"  #director="ngModel" pattern="[a-zA-Z]{3,}" class="form-group" required>
+             <div [hidden]="director.valid || director.untouched" class="alert alert-danger">
+              incorect director
+            </div>
+             <br>
+             <label>Year of creation: </label> 
+             <br>
+             <input type="date" name="year" [(ngModel)]="CreatedMovie.year" #year="ngModel" class="form-group" required >
+             <div [hidden]="year.dirty" class="alert alert-danger">
+              year can not be empty
+            </div>
+             <br>
+             
+         
+             <br>
+             <input [disabled]="title.invalid || director.invalid || year.pristine" type="button" id="addFilm" (click)="createMovie(f)" value="add new movie" class="btn btn-dark" >
+            
+        </form> 
+      
+     </div>       
+  
